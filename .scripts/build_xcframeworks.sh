@@ -61,7 +61,13 @@ function create_xcframework() {
 }
 
 function copyCommonFramworks() {
-  cp -R $SRCROOT/Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework $SRCROOT/Frameworks/hermes.xcframework
+  # cp -R $SRCROOT/Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework $SRCROOT/Frameworks/hermes.xcframework
+  # RN의 경우 hermes가 xcframework만 제공해서 복붙했는데 그 외 케이스가 있어서 Pods에서 일괄 복붙
+  find "$SRCROOT/Pods" -type d -name "*.xcframework" | while read -r framework; do
+    dest="$SRCROOT/Frameworks/$(basename "$framework")"
+    echo "Copying $framework to $dest"
+    cp -R "$framework" "$dest"
+  done
 }
 
 function clean() {
