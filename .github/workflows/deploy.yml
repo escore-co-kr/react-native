@@ -267,7 +267,7 @@ jobs:
         run: |
           RN_VERSION=$(node -e "
             const fs = require('fs'); 
-            const p = fs.readFileSync('output/package.json', 'utf-8');
+            const p = fs.readFileSync('package.json', 'utf-8');
             const package = JSON.parse(p);
             console.log(package.dependencies['react-native'].replace(/[^0-9.]/g, ''));
           ")
