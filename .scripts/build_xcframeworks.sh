@@ -75,7 +75,7 @@ function build_and_create_frameworks() {
     echo "INSTALL: NPM"
     npm i
     echo "INSTALL: pod"
-    npx pod-install # pod install
+    npx pod-install || exit 1; # pod install
     
     echo "BUILD: SWIFT Build Test"
     swift build || exit 1
